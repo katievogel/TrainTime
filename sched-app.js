@@ -10,10 +10,17 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-database.ref('train-schedule').on('value', function (snapshot) {
-    var trainString = JSON.stringify(snapshot.val());
-    $('.current-train-schedule').html('');
-    $('.current-train-schedule').append(trainString);
+var currentTime = moment();
+
+database.ref('train-schedule').on('child_added', function (snapshot) {
+    var newTrainRow = $("<tr>").append(
+        $("<td>").text(snapshot.val().trainName),
+        $("<td>").text(snapshot.val().destination),
+        $("<td>").text(snapshot.val().frequency),
+        $("<td>").text(snapshot.val().nextArrival),
+        $("<td>").text(snapshot.val().timeUntil)
+    );
+    $("#train-table > tbody").append(newTrainRow);
 });
 
 
@@ -21,15 +28,15 @@ $('.add-train-button').click(function (event) {
     var trainName = $('.train-name-input').val().trim();
     var destination = $('.destination-input').val().trim();
     var frequency = $('.frequency-input').val().trim();
-    var nextArrival = $('.arrival-input').val().trim();
-    var timeUntil = "";
+    var nextArrival = moment($('.arrival-input').val().trim(), "hh:mm A").format("HH:mm");
+    var timeUntil = moment(nextArrival, "HH:mm").fromNow();
 
     var trainRecord = {
         trainName: trainName,
         destination: destination,
         frequency: frequency,
         nextArrival: nextArrival,
-        timeUntil: 00
+        timeUntil: timeUntil
     };
 
     database.ref('train-schedule').push(trainRecord);
@@ -40,13 +47,7 @@ $('.add-train-button').click(function (event) {
     $('.arrival-input').val("");
 });
 
-var newTrainRow = $("<tr>").append(
-    $("<td>").text(trainName),
-    $("<td>").text(destination),
-    $("<td>").text(frequency),
-    $("<td>").text(nextArrival),
-    $("<td>").text(timeUntil),
-);
 
-$("#train-table > tbody").append(newTrainRow);
+
+
 
