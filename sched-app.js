@@ -29,7 +29,7 @@ $('.add-train-button').click(function (event) {
     var destination = $('.destination-input').val().trim();
     var frequency = $('.frequency-input').val().trim();
     var nextArrival = moment($('.arrival-input').val().trim(), "hh:mm A").format("HH:mm");
-    var timeUntil = moment(nextArrival, "HH:mm").fromNow();
+    var timeUntil = moment(nextArrival, "HH:mm").toNow();
 
     var trainRecord = {
         trainName: trainName,

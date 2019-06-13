@@ -1,6 +1,18 @@
+body {
+    font-family: Helvetica, Arial;
+    background-image: url(train-background.jpg);
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+    color: #571a18;
+    font-family: 'Suez One', serif;
+  }
+
 .card {
     margin: 30px auto;
     max-width: 960px;
+    border: 1px double #571a18;
+    border-radius:5px;
 }
 
 .container {
@@ -10,17 +22,32 @@
 
 .table {
     margin: 10px;
+    color: #571a18;
 }
 
 .form-group {
     margin: 20px;
+    color: #571a18;
 }
 
 h3 {
     margin: 20px auto auto 20px;
+    color: lightgoldenrodyellow;
 }
 
 button {
     margin: auto auto 20px 20px;
-    max-width: 80px;
+}
+
+.jumbotron {
+    background-color: #571a18;
+    background-image: url("https://www.transparenttextures.com/patterns/vintage-speckles.png");
+    border: 1px double #571a18;
+    color: lightgoldenrodyellow;
+}
+
+.card-header {
+    background-color: #571a18;
+    background-image: url("https://www.transparenttextures.com/patterns/vintage-speckles.png");
+    color: lightgoldenrodyellow;
 }
